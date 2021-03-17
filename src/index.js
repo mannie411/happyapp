@@ -1,12 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+
+import './assets/css/style.css'
+
+import routes from './routes'
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router >
+      <Header />
+      <div className="container">
+
+        <Switch>
+          {routes.map((route, idx) =>
+            <Route
+              key={idx}
+              path={route.path}
+              exact={route.exact}
+              children={<route.component />}
+            />
+          )}
+        </Switch>
+
+      </div>
+      <Footer />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
